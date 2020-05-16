@@ -1,0 +1,21 @@
+object Versions {
+    // App dependencies
+    const val kotlinVersion = "1.3.72"
+    const val androidxTestVersion = "1.1.0"
+    const val androidxAnnotations = "1.0.1"
+    const val androidxLegacySupport = "1.0.0"
+    const val appCompatVersion = "1.1.0"
+    const val constraintLayoutVersion = "1.1.3"
+    const val roomVersion = "2.2.5"
+    const val archLifecycleVersion = "2.1.0"
+    const val junitVersion = "4.12"
+    const val pagingVersion = "2.1.2"
+    const val glideVersion = "4.9.0"
+    const val daggerVersion = "2.27"
+    const val materialVersion = "1.2.0-alpha06"
+    const val retrofit2Version = "2.6.0"
+    const val coroutinesCoreVersion = "1.2.1"
+    const val coroutinesAndroidVersion = "1.1.1"
+    const val gsonVersion = "2.8.6"
+    const val shimmerVersion = "0.5.0"
+}
