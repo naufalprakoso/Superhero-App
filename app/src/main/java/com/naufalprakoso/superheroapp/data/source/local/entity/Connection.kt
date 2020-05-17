@@ -16,7 +16,7 @@ import androidx.room.Index
 data class Connection(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Int,
+    val id: Long,
 
     @ColumnInfo(name = "groupAffiliation")
     val groupAffiliation: String,

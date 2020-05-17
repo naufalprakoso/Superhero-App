@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="colorPrimary">#6200EE</color>
-	<color name="colorPrimaryDark">#3700B3</color>
-	<color name="colorAccent">#03DAC5</color>
+	<color name="colorPrimary">#37474f</color>
+	<color name="colorPrimaryDark">#263238</color>
+	<color name="colorAccent">#9fa8da</color>
+
+	<color name="greySelectable">#e0e0e0</color>
+	<color name="white">#fff</color>
+
+	<color name="textSelected">#212121</color>
+	<color name="textUnselected">#757575</color>
+
+	<color name="shimmerBackground">#dddddd</color>
 </resources>

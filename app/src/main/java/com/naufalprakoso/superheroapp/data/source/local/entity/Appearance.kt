@@ -16,7 +16,7 @@ import androidx.room.Index
 data class Appearance(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: String,
+    val id: Long,
 
     @ColumnInfo(name = "gender")
     val gender: String,

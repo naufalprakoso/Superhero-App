@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tab_size">40dp</dimen>
+    <dimen name="tab_space">6dp</dimen>
+
+    <dimen name="card_radius_normal">8dp</dimen>
+    <dimen name="card_elevation_normal">8dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+
+    <dimen name="height_image_hero">175dp</dimen>
+    <dimen name="width_image_hero">150dp</dimen>
+
+    <dimen name="text_size_name">16sp</dimen>
+    <dimen name="text_size_race">14sp</dimen>
+</resources>

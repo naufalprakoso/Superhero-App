@@ -1,11 +1,21 @@
 <resources>
 
-	<!-- Base application theme. -->
-	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-		<!-- Customize your theme here. -->
+	<style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
 		<item name="colorPrimary">@color/colorPrimary</item>
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
+	</style>
+
+	<style name="BaseCardView" parent="Widget.MaterialComponents.CardView">
+		<item name="android:foreground">?android:attr/selectableItemBackground</item>
+		<item name="android:focusable">true</item>
+		<item name="android:clickable">true</item>
+	</style>
+
+	<style name="HeroCardView" parent="BaseCardView">
+		<item name="cardCornerRadius">@dimen/card_radius_normal</item>
+		<item name="cardElevation">@dimen/card_elevation_normal</item>
+		<item name="rippleColor">@color/greySelectable</item>
 	</style>
 
 </resources>

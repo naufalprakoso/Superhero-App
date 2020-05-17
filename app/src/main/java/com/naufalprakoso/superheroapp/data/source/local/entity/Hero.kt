@@ -8,11 +8,14 @@ import androidx.room.PrimaryKey
 data class Hero(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Int,
+    val id: Long,
 
     @ColumnInfo(name = "name")
     val name: String,
 
     @ColumnInfo(name = "slug")
-    val slug: String
+    val slug: String,
+
+    @ColumnInfo(name = "alignment")
+    val alignment: String
 )

@@ -15,7 +15,7 @@ import androidx.room.Index
 data class Biography(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: String,
+    val id: Long,
     
     @ColumnInfo(name = "fullName")
     val fullName: String,

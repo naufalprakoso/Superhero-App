@@ -16,7 +16,7 @@ import androidx.room.Index
 data class PowerStat(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Int,
+    val id: Long,
 
     @ColumnInfo(name = "intelligence")
     val intelligence: Int,

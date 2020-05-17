@@ -16,7 +16,7 @@ import androidx.room.Index
 data class Image(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Int,
+    val id: Long,
 
     @ColumnInfo(name = "xs")
     val xs: String,

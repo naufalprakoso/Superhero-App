@@ -16,7 +16,7 @@ import androidx.room.Index
 data class Work(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Int,
+    val id: Long,
 
     @ColumnInfo(name = "occupation")
     val occupation: String,
