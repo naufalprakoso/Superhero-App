@@ -26,6 +26,7 @@ interface HeroUseCase {
     fun getHeroes(): LiveData<Resource<PagedList<Superhero>>>
     fun getAntiHeroes(): LiveData<Resource<PagedList<Superhero>>>
     fun getVillains(): LiveData<Resource<PagedList<Superhero>>>
+    fun getHeroById(id: Long): LiveData<Resource<Superhero>>
 }
 
 class HeroUseCaseImpl(
@@ -189,6 +190,19 @@ class HeroUseCaseImpl(
                     )
                 }
             }
+        }.asLiveData()
+    }
+
+    override fun getHeroById(id: Long): LiveData<Resource<Superhero>> {
+        return object :
+            NetworkBoundResource<Superhero, HeroResponse>(contextProviders) {
+            override fun loadFromDB(): LiveData<Superhero> {
+                return heroRepository?.getById(id)!!
+            }
+
+            override fun shouldFetch(data: Superhero?): Boolean = false
+            override fun createCall(): LiveData<ApiResponse<HeroResponse>>? = null
+            override fun saveCallResult(data: HeroResponse) {}
         }.asLiveData()
     }
 }

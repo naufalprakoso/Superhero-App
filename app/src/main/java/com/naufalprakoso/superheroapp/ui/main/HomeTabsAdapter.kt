@@ -18,5 +18,4 @@ class HomeTabsAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter
             else -> VillainFragment.getInstance()
         }
     }
-
 }

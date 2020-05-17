@@ -28,7 +28,6 @@ class LiveDataCallAdapter<R>(private val responseType: Type) :
                         }
 
                         override fun onFailure(call: Call<R>, throwable: Throwable) {
-
                         }
                     })
                 }

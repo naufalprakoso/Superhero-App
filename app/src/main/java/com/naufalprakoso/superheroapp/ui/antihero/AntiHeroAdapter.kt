@@ -55,7 +55,7 @@ class AntiHeroAdapter(
         fun bindItem(context: Context, superhero: Superhero, clickListener: (Long) -> Unit) {
             val image = superhero.image.md
             val hero = superhero.hero
-            val race = superhero.appearance.race
+            val race = superhero.appearance.getRace
 
             Glide.with(context).asBitmap().apply(UtilUi.imageHero()).load(image).into(itemView.ivHero)
             itemView.tvName.text = hero.name

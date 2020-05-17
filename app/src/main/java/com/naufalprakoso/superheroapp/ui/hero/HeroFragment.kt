@@ -1,5 +1,6 @@
 package com.naufalprakoso.superheroapp.ui.hero
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.naufalprakoso.superheroapp.R
+import com.naufalprakoso.superheroapp.ui.detail.HeroDetailActivity
+import com.naufalprakoso.superheroapp.util.HERO_ID
 import com.naufalprakoso.superheroapp.viewmodel.ViewModelFactory
 import com.naufalprakoso.superheroapp.vo.Status
 import kotlinx.android.synthetic.main.fragment_hero.*
@@ -26,7 +29,8 @@ class HeroFragment : Fragment() {
     var factory: ViewModelProvider.Factory? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_hero, container, false)
@@ -39,8 +43,10 @@ class HeroFragment : Fragment() {
             viewModel = obtainViewModel(activity)
 
             if (context != null && viewModel != null) {
-                adapter = HeroAdapter(context!!) {
-                    TODO("Intent to Hero Detail")
+                adapter = HeroAdapter(context!!) { heroId ->
+                    val intent = Intent(context, HeroDetailActivity::class.java)
+                    intent.putExtra(HERO_ID, heroId)
+                    startActivity(intent)
                 }
                 adapter.setHasStableIds(true)
 
@@ -92,5 +98,4 @@ class HeroFragment : Fragment() {
     companion object {
         fun getInstance(): Fragment = HeroFragment()
     }
-
 }

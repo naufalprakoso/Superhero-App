@@ -50,26 +50,26 @@ class HeroMapper {
             id,
             appearanceResponse.gender,
             appearanceResponse.race,
-            appearanceResponse.height.joinToString(","),
-            appearanceResponse.weight.joinToString(","),
+            appearanceResponse.height.joinToString(", "),
+            appearanceResponse.weight.joinToString(", "),
             appearanceResponse.eyeColor,
             appearanceResponse.hairColor
         )
     }
-    
+
     fun convertResponseToBiography(biographyResponse: BiographyResponse, id: Long): Biography {
         return Biography(
             id,
             biographyResponse.fullName,
             biographyResponse.alterEgos,
-            biographyResponse.aliases.joinToString(","),
+            biographyResponse.aliases.joinToString(", "),
             biographyResponse.placeOfBirth,
             biographyResponse.firstAppearance,
             biographyResponse.publisher,
             biographyResponse.alignment
         )
     }
-    
+
     fun convertResponseToConnection(connectionResponse: ConnectionResponse, id: Long): Connection {
         return Connection(
             id,
@@ -77,7 +77,7 @@ class HeroMapper {
             connectionResponse.relatives
         )
     }
-    
+
     fun convertResponseToImage(imageResponse: ImageResponse, id: Long): Image {
         return Image(
             id,

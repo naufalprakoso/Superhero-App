@@ -16,7 +16,7 @@ data class Biography(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Long,
-    
+
     @ColumnInfo(name = "fullName")
     val fullName: String,
 

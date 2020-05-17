@@ -6,6 +6,7 @@
 
 	<color name="greySelectable">#e0e0e0</color>
 	<color name="white">#fff</color>
+	<color name="darkGrey">#212121</color>
 
 	<color name="textSelected">#212121</color>
 	<color name="textUnselected">#757575</color>

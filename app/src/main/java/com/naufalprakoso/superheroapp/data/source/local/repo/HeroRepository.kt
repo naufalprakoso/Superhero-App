@@ -1,5 +1,6 @@
 package com.naufalprakoso.superheroapp.data.source.local.repo
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import com.naufalprakoso.superheroapp.data.source.local.db.HeroDao
 import com.naufalprakoso.superheroapp.data.source.local.entity.Hero
@@ -35,6 +36,10 @@ class HeroRepository(private val heroDao: HeroDao) {
         return heroDao.getVillains()
     }
 
+    fun getById(id: Long): LiveData<Superhero> {
+        return heroDao.getById(id)
+    }
+
     suspend fun insertSuperheroes(
         heroes: List<Hero>,
         powerStats: List<PowerStat>,
@@ -48,6 +53,5 @@ class HeroRepository(private val heroDao: HeroDao) {
             heroes, powerStats, works,
             biographies, connections, images, appearances
         )
-
     }
 }

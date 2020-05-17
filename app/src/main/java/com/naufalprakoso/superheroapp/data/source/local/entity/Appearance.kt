@@ -35,4 +35,7 @@ data class Appearance(
 
     @ColumnInfo(name = "hairColor")
     val hairColor: String
-)
+) {
+    val getRace
+        get() = if (race.isNullOrEmpty()) "-" else race
+}

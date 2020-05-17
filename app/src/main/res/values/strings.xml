@@ -10,4 +10,34 @@
     <string name="title_hero">Hero</string>
     <string name="title_anti_hero">Anti-Hero</string>
     <string name="title_villain">Villain</string>
+
+    <string name="title_tab_biography">Biography</string>
+    <string name="title_tab_power_stats">Power Stats</string>
+    <string name="title_tab_appearance">Appearance</string>
+    <string name="title_tab_work">Work</string>
+    <string name="title_tab_connection">Connection</string>
+
+    <string name="text_compare_hero">Compare Hero</string>
+    <string name="text_intelligence">Intelligence</string>
+    <string name="text_strength">Strength</string>
+    <string name="text_speed">Speed</string>
+    <string name="text_durability">Durability</string>
+    <string name="text_power">Power</string>
+    <string name="text_combat">Combat</string>
+    <string name="text_full_name">Full Name</string>
+    <string name="text_place_of_birth">Place of Birth</string>
+    <string name="text_first_appearance">First Appearance</string>
+    <string name="text_alter_egos">Alter Egos</string>
+    <string name="text_aliases">Aliases</string>
+    <string name="text_publisher">Publisher</string>
+    <string name="text_occupation">Occupation</string>
+    <string name="text_base">Base</string>
+    <string name="text_group_affiliation">Group Affiliation</string>
+    <string name="text_relatives">Relatives</string>
+    <string name="text_gender">Gender</string>
+    <string name="text_race">Race</string>
+    <string name="text_height">Height</string>
+    <string name="text_weight">Weight</string>
+    <string name="text_eye_color">Eye Color</string>
+    <string name="text_hair_color">Hair Color</string>
 </resources>

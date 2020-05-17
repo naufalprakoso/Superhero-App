@@ -1,5 +1,6 @@
 package com.naufalprakoso.superheroapp.data.source.local.db
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
@@ -27,7 +28,7 @@ interface HeroDao {
     fun getAntiHeroes(): DataSource.Factory<Int, Superhero>
 
     @Query("SELECT * FROM superhero WHERE id = :id")
-    fun getById(id: Long): Superhero
+    fun getById(id: Long): LiveData<Superhero>
 
     @Transaction
     suspend fun insertSuperheroes(
