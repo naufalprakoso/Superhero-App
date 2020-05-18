@@ -37,7 +37,6 @@ Superhero app built with Kotlin
 - [ ] [Databinding](https://developer.android.com/topic/libraries/data-binding)
 - [ ] [Navigation](https://developer.android.com/topic/libraries/architecture/navigation)
 - [ ] [Koin](https://insert-koin.io/)
-- [ ] Dagger2
 - [ ] JUnit
 - [ ] DayNight
 
