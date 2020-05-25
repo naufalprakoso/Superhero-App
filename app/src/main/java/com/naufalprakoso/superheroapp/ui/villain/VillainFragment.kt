@@ -12,11 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.naufalprakoso.superheroapp.R
+import com.naufalprakoso.superheroapp.databinding.FragmentVillainBinding
 import com.naufalprakoso.superheroapp.ui.detail.HeroDetailActivity
 import com.naufalprakoso.superheroapp.util.HERO_ID
 import com.naufalprakoso.superheroapp.viewmodel.ViewModelFactory
 import com.naufalprakoso.superheroapp.vo.Status
-import kotlinx.android.synthetic.main.fragment_villain.*
 import javax.inject.Inject
 
 class VillainFragment : Fragment() {
@@ -28,12 +28,21 @@ class VillainFragment : Fragment() {
     @JvmField
     var factory: ViewModelProvider.Factory? = null
 
+    private var _binding: FragmentVillainBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_villain, container, false)
+        _binding = FragmentVillainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -50,22 +59,22 @@ class VillainFragment : Fragment() {
                 }
                 adapter.setHasStableIds(true)
 
-                rvVillains.setHasFixedSize(true)
-                rvVillains.setItemViewCacheSize(10)
-                rvVillains.layoutManager = GridLayoutManager(context, 2)
-                rvVillains.adapter = adapter
-                rvVillains.isNestedScrollingEnabled = false
+                binding.rvVillains.setHasFixedSize(true)
+                binding.rvVillains.setItemViewCacheSize(10)
+                binding.rvVillains.layoutManager = GridLayoutManager(context, 2)
+                binding.rvVillains.adapter = adapter
+                binding.rvVillains.isNestedScrollingEnabled = false
 
                 viewModel!!.getVillains()?.observe(viewLifecycleOwner, Observer {
                     when (it.status) {
                         Status.LOADING -> {
-                            shimmerLoading.apply {
+                            binding.shimmerLoading.apply {
                                 visibility = View.VISIBLE
                                 startShimmer()
                             }
                         }
                         Status.SUCCESS -> {
-                            shimmerLoading.apply {
+                            binding.shimmerLoading.apply {
                                 stopShimmer()
                                 visibility = View.GONE
                             }
@@ -79,7 +88,7 @@ class VillainFragment : Fragment() {
                         }
                         Status.ERROR -> {
                             Toast.makeText(activity, getString(R.string.msg_check_connection), Toast.LENGTH_SHORT).show()
-                            shimmerLoading.apply {
+                            binding.shimmerLoading.apply {
                                 stopShimmer()
                                 visibility = View.GONE
                             }

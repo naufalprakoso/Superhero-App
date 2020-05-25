@@ -5,26 +5,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.naufalprakoso.superheroapp.R
 import com.naufalprakoso.superheroapp.data.source.local.entity.Connection
-import kotlinx.android.synthetic.main.fragment_connection.*
+import com.naufalprakoso.superheroapp.databinding.FragmentConnectionBinding
 
 class ConnectionFragment(private val connection: Connection) : Fragment() {
+
+    private var _binding: FragmentConnectionBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_connection, container, false)
+        _binding = FragmentConnectionBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         if (activity != null) {
-            tvGroupAffiliation.text = connection.groupAffiliation
-            tvRelatives.text = connection.relatives
+            binding.tvGroupAffiliation.text = connection.groupAffiliation
+            binding.tvRelatives.text = connection.relatives
         }
     }
 

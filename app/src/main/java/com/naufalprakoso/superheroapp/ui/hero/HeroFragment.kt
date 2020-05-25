@@ -12,11 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.naufalprakoso.superheroapp.R
+import com.naufalprakoso.superheroapp.databinding.FragmentHeroBinding
 import com.naufalprakoso.superheroapp.ui.detail.HeroDetailActivity
 import com.naufalprakoso.superheroapp.util.HERO_ID
 import com.naufalprakoso.superheroapp.viewmodel.ViewModelFactory
 import com.naufalprakoso.superheroapp.vo.Status
-import kotlinx.android.synthetic.main.fragment_hero.*
 import javax.inject.Inject
 
 class HeroFragment : Fragment() {
@@ -28,12 +28,21 @@ class HeroFragment : Fragment() {
     @JvmField
     var factory: ViewModelProvider.Factory? = null
 
+    private var _binding: FragmentHeroBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_hero, container, false)
+        _binding = FragmentHeroBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -50,22 +59,22 @@ class HeroFragment : Fragment() {
                 }
                 adapter.setHasStableIds(true)
 
-                rvHeroes.setHasFixedSize(true)
-                rvHeroes.setItemViewCacheSize(10)
-                rvHeroes.layoutManager = GridLayoutManager(context, 2)
-                rvHeroes.adapter = adapter
-                rvHeroes.isNestedScrollingEnabled = false
+                binding.rvHeroes.setHasFixedSize(true)
+                binding.rvHeroes.setItemViewCacheSize(10)
+                binding.rvHeroes.layoutManager = GridLayoutManager(context, 2)
+                binding.rvHeroes.adapter = adapter
+                binding.rvHeroes.isNestedScrollingEnabled = false
 
                 viewModel!!.getHeroes()?.observe(viewLifecycleOwner, Observer {
                     when (it.status) {
                         Status.LOADING -> {
-                            shimmerLoading.apply {
+                            binding.shimmerLoading.apply {
                                 visibility = View.VISIBLE
                                 startShimmer()
                             }
                         }
                         Status.SUCCESS -> {
-                            shimmerLoading.apply {
+                            binding.shimmerLoading.apply {
                                 stopShimmer()
                                 visibility = View.GONE
                             }
@@ -79,7 +88,7 @@ class HeroFragment : Fragment() {
                         }
                         Status.ERROR -> {
                             Toast.makeText(activity, getString(R.string.msg_check_connection), Toast.LENGTH_SHORT).show()
-                            shimmerLoading.apply {
+                            binding.shimmerLoading.apply {
                                 stopShimmer()
                                 visibility = View.GONE
                             }

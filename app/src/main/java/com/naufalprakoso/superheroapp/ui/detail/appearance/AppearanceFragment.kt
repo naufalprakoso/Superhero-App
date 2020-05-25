@@ -5,30 +5,38 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.naufalprakoso.superheroapp.R
 import com.naufalprakoso.superheroapp.data.source.local.entity.Appearance
-import kotlinx.android.synthetic.main.fragment_appearance.*
+import com.naufalprakoso.superheroapp.databinding.FragmentAppearanceBinding
 
 class AppearanceFragment(private val appearance: Appearance) : Fragment() {
+
+    private var _binding: FragmentAppearanceBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_appearance, container, false)
+        _binding = FragmentAppearanceBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         if (activity != null) {
-            tvGender.text = appearance.gender
-            tvRace.text = appearance.getRace
-            tvHeight.text = appearance.height
-            tvWeight.text = appearance.weight
-            tvEyeColor.text = appearance.eyeColor
-            tvHairColor.text = appearance.hairColor
+            binding.tvGender.text = appearance.gender
+            binding.tvRace.text = appearance.getRace
+            binding.tvHeight.text = appearance.height
+            binding.tvWeight.text = appearance.weight
+            binding.tvEyeColor.text = appearance.eyeColor
+            binding.tvHairColor.text = appearance.hairColor
         }
     }
 

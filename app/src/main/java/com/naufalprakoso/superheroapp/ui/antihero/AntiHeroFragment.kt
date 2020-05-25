@@ -12,11 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.naufalprakoso.superheroapp.R
+import com.naufalprakoso.superheroapp.databinding.FragmentAntiHeroBinding
 import com.naufalprakoso.superheroapp.ui.detail.HeroDetailActivity
 import com.naufalprakoso.superheroapp.util.HERO_ID
 import com.naufalprakoso.superheroapp.viewmodel.ViewModelFactory
 import com.naufalprakoso.superheroapp.vo.Status
-import kotlinx.android.synthetic.main.fragment_anti_hero.*
 import javax.inject.Inject
 
 class AntiHeroFragment : Fragment() {
@@ -28,12 +28,21 @@ class AntiHeroFragment : Fragment() {
     @JvmField
     var factory: ViewModelProvider.Factory? = null
 
+    private var _binding: FragmentAntiHeroBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_anti_hero, container, false)
+        _binding = FragmentAntiHeroBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -50,22 +59,22 @@ class AntiHeroFragment : Fragment() {
                 }
                 adapter.setHasStableIds(true)
 
-                rvAntiHeroes.setHasFixedSize(true)
-                rvAntiHeroes.setItemViewCacheSize(10)
-                rvAntiHeroes.layoutManager = GridLayoutManager(context, 2)
-                rvAntiHeroes.adapter = adapter
-                rvAntiHeroes.isNestedScrollingEnabled = false
+                binding.rvAntiHeroes.setHasFixedSize(true)
+                binding.rvAntiHeroes.setItemViewCacheSize(10)
+                binding.rvAntiHeroes.layoutManager = GridLayoutManager(context, 2)
+                binding.rvAntiHeroes.adapter = adapter
+                binding.rvAntiHeroes.isNestedScrollingEnabled = false
 
                 viewModel!!.getAntiHeroes()?.observe(viewLifecycleOwner, Observer {
                     when (it.status) {
                         Status.LOADING -> {
-                            shimmerLoading.apply {
+                            binding.shimmerLoading.apply {
                                 visibility = View.VISIBLE
                                 startShimmer()
                             }
                         }
                         Status.SUCCESS -> {
-                            shimmerLoading.apply {
+                            binding.shimmerLoading.apply {
                                 stopShimmer()
                                 visibility = View.GONE
                             }
@@ -79,7 +88,7 @@ class AntiHeroFragment : Fragment() {
                         }
                         Status.ERROR -> {
                             Toast.makeText(context, getString(R.string.msg_check_connection), Toast.LENGTH_SHORT).show()
-                            shimmerLoading.apply {
+                            binding.shimmerLoading.apply {
                                 stopShimmer()
                                 visibility = View.GONE
                             }

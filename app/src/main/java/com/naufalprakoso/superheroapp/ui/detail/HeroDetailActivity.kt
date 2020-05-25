@@ -12,12 +12,11 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.naufalprakoso.superheroapp.R
+import com.naufalprakoso.superheroapp.databinding.ActivityHeroDetailBinding
 import com.naufalprakoso.superheroapp.util.HERO_ID
 import com.naufalprakoso.superheroapp.util.UtilUi
 import com.naufalprakoso.superheroapp.viewmodel.ViewModelFactory
 import com.naufalprakoso.superheroapp.vo.Status
-import kotlinx.android.synthetic.main.activity_hero_detail.*
-import kotlinx.android.synthetic.main.layout_hero_detail_header.*
 import javax.inject.Inject
 
 class HeroDetailActivity : AppCompatActivity() {
@@ -28,9 +27,11 @@ class HeroDetailActivity : AppCompatActivity() {
     @JvmField
     var factory: ViewModelProvider.Factory? = null
 
+    private lateinit var binding: ActivityHeroDetailBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hero_detail)
+        binding = ActivityHeroDetailBinding.inflate(layoutInflater)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val tabTitles = arrayOf(
@@ -41,14 +42,14 @@ class HeroDetailActivity : AppCompatActivity() {
             getString(R.string.title_tab_connection)
         )
 
-        tabLayout.apply {
+        binding.tabLayout.apply {
             tabGravity = TabLayout.GRAVITY_FILL
 
-            addTab(tabLayout.newTab().setText(getString(R.string.title_tab_biography)))
-            addTab(tabLayout.newTab().setText(getString(R.string.title_tab_power_stats)))
-            addTab(tabLayout.newTab().setText(getString(R.string.title_tab_appearance)))
-            addTab(tabLayout.newTab().setText(getString(R.string.title_tab_work)))
-            addTab(tabLayout.newTab().setText(getString(R.string.title_tab_connection)))
+            addTab(binding.tabLayout.newTab().setText(getString(R.string.title_tab_biography)))
+            addTab(binding.tabLayout.newTab().setText(getString(R.string.title_tab_power_stats)))
+            addTab(binding.tabLayout.newTab().setText(getString(R.string.title_tab_appearance)))
+            addTab(binding.tabLayout.newTab().setText(getString(R.string.title_tab_work)))
+            addTab(binding.tabLayout.newTab().setText(getString(R.string.title_tab_connection)))
 
             setTabTextColors(
                 ContextCompat.getColor(applicationContext, R.color.textUnselected),
@@ -57,7 +58,7 @@ class HeroDetailActivity : AppCompatActivity() {
 
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    viewPager.currentItem = tab.position
+                    binding.viewPager.currentItem = tab.position
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {}
@@ -73,40 +74,42 @@ class HeroDetailActivity : AppCompatActivity() {
             viewModel?.getHeroDetail()?.observe(this, Observer { resources ->
                 when (resources.status) {
                     Status.LOADING -> {
-                        shimmerLoading.apply {
+                        binding.shimmerLoading.apply {
                             startShimmer()
                         }
                     }
                     Status.SUCCESS -> {
                         val hero = resources?.data
 
-                        shimmerLoading.apply {
+                        binding.shimmerLoading.apply {
                             stopShimmer()
                             visibility = View.GONE
                         }
-                        layoutMain.visibility = View.VISIBLE
+                        binding.layoutMain.visibility = View.VISIBLE
 
                         if (hero != null) {
                             supportActionBar?.title = hero.hero.name
 
-                            Glide.with(this).asBitmap().apply(UtilUi.imageHero()).load(hero.image.lg).into(ivHero)
-                            tvName.text = hero.hero.name
-                            tvRace.text = hero.appearance.getRace
+                            Glide.with(this).asBitmap().apply(UtilUi.imageHero()).load(hero.image.lg).into(binding.layoutHeader.ivHero)
+                            binding.layoutHeader.tvName.text = hero.hero.name
+                            binding.layoutHeader.tvRace.text = hero.appearance.getRace
 
-                            val tabsAdapter = HeroDetailTabsAdapter(this, hero, tabLayout.tabCount)
-                            viewPager.adapter = tabsAdapter
-                            TabLayoutMediator(tabLayout, viewPager) { tab, position -> tab.text = tabTitles[position] }.attach()
+                            val tabsAdapter = HeroDetailTabsAdapter(this, hero, binding.tabLayout.tabCount)
+                            binding.viewPager.adapter = tabsAdapter
+                            TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position -> tab.text = tabTitles[position] }.attach()
                         }
                     }
                     Status.ERROR -> {
                         Toast.makeText(this, getString(R.string.msg_check_connection), Toast.LENGTH_SHORT).show()
-                        shimmerLoading.apply {
+                        binding.shimmerLoading.apply {
                             stopShimmer()
                         }
                     }
                 }
             })
         }
+
+        setContentView(binding.root)
     }
 
     override fun onSupportNavigateUp(): Boolean {

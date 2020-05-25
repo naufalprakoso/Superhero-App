@@ -34,7 +34,8 @@ Superhero app built with Kotlin
 - [x] [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html)
 - [x] [Ktlint](https://ktlint.github.io/)
 - [x] [Retrofit](https://square.github.io/retrofit/)
-- [ ] [Databinding](https://developer.android.com/topic/libraries/data-binding)
+- [x] [View Binding](https://developer.android.com/topic/libraries/view-binding)
+- [ ] [Data Binding](https://developer.android.com/topic/libraries/data-binding)
 - [ ] [Navigation](https://developer.android.com/topic/libraries/architecture/navigation)
 - [ ] [Koin](https://insert-koin.io/)
 - [ ] JUnit
