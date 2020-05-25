@@ -19,8 +19,7 @@ class VillainAdapter(
 
     private val inflater = LayoutInflater.from(context)
 
-    private var _binding: ItemHeroBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ItemHeroBinding
 
     companion object {
         val VillainDiffCallback = object : DiffUtil.ItemCallback<Superhero>() {
@@ -42,7 +41,7 @@ class VillainAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        _binding = ItemHeroBinding.inflate(inflater, parent, false)
+        binding = ItemHeroBinding.inflate(inflater, parent, false)
         return ViewHolder(binding.root)
     }
 

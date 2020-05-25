@@ -18,9 +18,7 @@ class HeroAdapter(
 ) : PagedListAdapter<Superhero, HeroAdapter.ViewHolder>(HeroDiffCallback) {
 
     private val inflater = LayoutInflater.from(context)
-
-    private var _binding: ItemHeroBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ItemHeroBinding
 
     companion object {
         val HeroDiffCallback = object : DiffUtil.ItemCallback<Superhero>() {
@@ -42,7 +40,7 @@ class HeroAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        _binding = ItemHeroBinding.inflate(inflater, parent, false)
+        binding = ItemHeroBinding.inflate(inflater, parent, false)
         return ViewHolder(binding.root)
     }
 
