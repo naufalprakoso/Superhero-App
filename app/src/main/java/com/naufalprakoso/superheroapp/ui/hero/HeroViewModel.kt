@@ -6,9 +6,10 @@ import androidx.paging.PagedList
 import com.naufalprakoso.superheroapp.data.source.local.relation.Superhero
 import com.naufalprakoso.superheroapp.data.source.usecase.HeroUseCase
 import com.naufalprakoso.superheroapp.vo.Resource
+import javax.inject.Inject
 
-class HeroViewModel(
-    private val heroUseCase: HeroUseCase? = null
+class HeroViewModel @Inject constructor(
+    private val heroUseCase: HeroUseCase
 ) : ViewModel() {
-    fun getHeroes(): LiveData<Resource<PagedList<Superhero>>>? = heroUseCase?.getHeroes()
+    fun getHeroes(): LiveData<Resource<PagedList<Superhero>>>? = heroUseCase.getHeroes()
 }

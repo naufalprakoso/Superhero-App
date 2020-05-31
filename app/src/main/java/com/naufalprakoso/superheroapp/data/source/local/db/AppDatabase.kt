@@ -30,19 +30,14 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         private var INSTANCE: AppDatabase? = null
-        private val sLock = Object()
 
-        fun getInstance(context: Context): AppDatabase? {
-            synchronized(sLock) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(
-                        context.applicationContext,
-                        AppDatabase::class.java, "SuperheroApp.db"
-                    ).build()
-                }
+        fun getInstance(context: Context): AppDatabase {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java, "Superhero.db"
+                ).build()
             }
-
-            return INSTANCE
         }
     }
 }

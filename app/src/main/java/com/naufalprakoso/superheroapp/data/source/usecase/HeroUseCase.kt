@@ -30,9 +30,9 @@ interface HeroUseCase {
 }
 
 class HeroUseCaseImpl(
-    private val heroRepository: HeroRepository? = null,
-    private val ioScope: CoroutineScope? = null,
-    private val contextProviders: ContextProviders = ContextProviders()
+    private val heroRepository: HeroRepository,
+    private val ioScope: CoroutineScope,
+    private val contextProviders: ContextProviders
 ) : HeroUseCase {
 
     private val pagedListConfig = PagedList.Config.Builder()
@@ -45,30 +45,11 @@ class HeroUseCaseImpl(
         HeroMapper()
     }
 
-    companion object {
-        @Volatile
-        private var INSTANCE: HeroUseCase? = null
-
-        fun getInstance(
-            heroRepository: HeroRepository?,
-            ioScope: CoroutineScope?
-        ): HeroUseCase? {
-            if (INSTANCE == null) {
-                synchronized(HeroUseCase::class.java) {
-                    if (INSTANCE == null) {
-                        INSTANCE = HeroUseCaseImpl(heroRepository, ioScope)
-                    }
-                }
-            }
-            return INSTANCE
-        }
-    }
-
     override fun getHeroes(): LiveData<Resource<PagedList<Superhero>>> {
         return object :
             NetworkBoundResource<PagedList<Superhero>, List<HeroResponse>>(contextProviders) {
             override fun loadFromDB(): LiveData<PagedList<Superhero>> {
-                return LivePagedListBuilder(heroRepository?.getHeroes()!!, pagedListConfig).build()
+                return LivePagedListBuilder(heroRepository.getHeroes(), pagedListConfig).build()
             }
 
             override fun shouldFetch(data: PagedList<Superhero>?): Boolean = data?.isEmpty() == true
@@ -97,8 +78,8 @@ class HeroUseCaseImpl(
                     biographies.add(heroMapper.convertResponseToBiography(hero.biography, id))
                 }
 
-                ioScope?.launch {
-                    heroRepository?.insertSuperheroes(
+                ioScope.launch {
+                    heroRepository.insertSuperheroes(
                         heroes, powerStats, works, biographies,
                         connections, images, appearance
                     )
@@ -111,7 +92,7 @@ class HeroUseCaseImpl(
         return object :
             NetworkBoundResource<PagedList<Superhero>, List<HeroResponse>>(contextProviders) {
             override fun loadFromDB(): LiveData<PagedList<Superhero>> {
-                return LivePagedListBuilder(heroRepository?.getAntiHeroes()!!, pagedListConfig).build()
+                return LivePagedListBuilder(heroRepository.getAntiHeroes(), pagedListConfig).build()
             }
 
             override fun shouldFetch(data: PagedList<Superhero>?): Boolean = data?.isEmpty() == true
@@ -140,8 +121,8 @@ class HeroUseCaseImpl(
                     biographies.add(heroMapper.convertResponseToBiography(hero.biography, id))
                 }
 
-                ioScope?.launch {
-                    heroRepository?.insertSuperheroes(
+                ioScope.launch {
+                    heroRepository.insertSuperheroes(
                         heroes, powerStats, works, biographies,
                         connections, images, appearance
                     )
@@ -154,7 +135,7 @@ class HeroUseCaseImpl(
         return object :
             NetworkBoundResource<PagedList<Superhero>, List<HeroResponse>>(contextProviders) {
             override fun loadFromDB(): LiveData<PagedList<Superhero>> {
-                return LivePagedListBuilder(heroRepository?.getVillains()!!, pagedListConfig).build()
+                return LivePagedListBuilder(heroRepository.getVillains(), pagedListConfig).build()
             }
 
             override fun shouldFetch(data: PagedList<Superhero>?): Boolean = data?.isEmpty() == true
@@ -183,8 +164,8 @@ class HeroUseCaseImpl(
                     biographies.add(heroMapper.convertResponseToBiography(hero.biography, id))
                 }
 
-                ioScope?.launch {
-                    heroRepository?.insertSuperheroes(
+                ioScope.launch {
+                    heroRepository.insertSuperheroes(
                         heroes, powerStats, works, biographies,
                         connections, images, appearance
                     )
@@ -197,7 +178,7 @@ class HeroUseCaseImpl(
         return object :
             NetworkBoundResource<Superhero, HeroResponse>(contextProviders) {
             override fun loadFromDB(): LiveData<Superhero> {
-                return heroRepository?.getById(id)!!
+                return heroRepository.getById(id)
             }
 
             override fun shouldFetch(data: Superhero?): Boolean = false

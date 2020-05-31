@@ -12,35 +12,41 @@ import com.naufalprakoso.superheroapp.data.source.local.entity.Connection
 import com.naufalprakoso.superheroapp.data.source.local.entity.PowerStat
 import com.naufalprakoso.superheroapp.data.source.local.relation.Superhero
 
-class HeroRepository(private val heroDao: HeroDao) {
-    companion object {
-        private var INSTANCE: HeroRepository? = null
+interface HeroRepository {
+    fun getHeroes(): DataSource.Factory<Int, Superhero>
+    fun getAntiHeroes(): DataSource.Factory<Int, Superhero>
+    fun getVillains(): DataSource.Factory<Int, Superhero>
+    fun getById(id: Long): LiveData<Superhero>
 
-        fun getInstance(heroDao: HeroDao): HeroRepository? {
-            if (INSTANCE == null) {
-                INSTANCE = HeroRepository(heroDao)
-            }
-            return INSTANCE
-        }
-    }
+    suspend fun insertSuperheroes(
+        heroes: List<Hero>,
+        powerStats: List<PowerStat>,
+        works: List<Work>,
+        biographies: List<Biography>,
+        connections: List<Connection>,
+        images: List<Image>,
+        appearances: List<Appearance>
+    )
+}
 
-    fun getHeroes(): DataSource.Factory<Int, Superhero> {
+class HeroRepositoryImpl(private val heroDao: HeroDao) : HeroRepository {
+    override fun getHeroes(): DataSource.Factory<Int, Superhero> {
         return heroDao.getHeroes()
     }
 
-    fun getAntiHeroes(): DataSource.Factory<Int, Superhero> {
+    override fun getAntiHeroes(): DataSource.Factory<Int, Superhero> {
         return heroDao.getAntiHeroes()
     }
 
-    fun getVillains(): DataSource.Factory<Int, Superhero> {
+    override fun getVillains(): DataSource.Factory<Int, Superhero> {
         return heroDao.getVillains()
     }
 
-    fun getById(id: Long): LiveData<Superhero> {
+    override fun getById(id: Long): LiveData<Superhero> {
         return heroDao.getById(id)
     }
 
-    suspend fun insertSuperheroes(
+    override suspend fun insertSuperheroes(
         heroes: List<Hero>,
         powerStats: List<PowerStat>,
         works: List<Work>,

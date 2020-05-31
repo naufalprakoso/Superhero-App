@@ -2,31 +2,29 @@ package com.naufalprakoso.superheroapp.ui.antihero
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.naufalprakoso.superheroapp.R
+import com.naufalprakoso.superheroapp.SuperheroApplication
 import com.naufalprakoso.superheroapp.databinding.FragmentAntiHeroBinding
 import com.naufalprakoso.superheroapp.ui.detail.HeroDetailActivity
 import com.naufalprakoso.superheroapp.util.HERO_ID
-import com.naufalprakoso.superheroapp.viewmodel.ViewModelFactory
 import com.naufalprakoso.superheroapp.vo.Status
 import javax.inject.Inject
 
 class AntiHeroFragment : Fragment() {
 
     private lateinit var adapter: AntiHeroAdapter
-    private var viewModel: AntiHeroViewModel? = null
+    private lateinit var viewModel: AntiHeroViewModel
 
     @Inject
-    @JvmField
-    var factory: ViewModelProvider.Factory? = null
+    lateinit var factory: ViewModelProvider.Factory
 
     private var _binding: FragmentAntiHeroBinding? = null
     private val binding get() = _binding!!
@@ -49,9 +47,9 @@ class AntiHeroFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         if (activity != null) {
-            viewModel = obtainViewModel(activity)
+            inject()
 
-            if (context != null && viewModel != null) {
+            if (context != null) {
                 adapter = AntiHeroAdapter(context!!) { heroId ->
                     val intent = Intent(context, HeroDetailActivity::class.java)
                     intent.putExtra(HERO_ID, heroId)
@@ -65,7 +63,7 @@ class AntiHeroFragment : Fragment() {
                 binding.rvAntiHeroes.adapter = adapter
                 binding.rvAntiHeroes.isNestedScrollingEnabled = false
 
-                viewModel!!.getAntiHeroes()?.observe(viewLifecycleOwner, Observer {
+                viewModel.getAntiHeroes()?.observe(viewLifecycleOwner, Observer {
                     when (it.status) {
                         Status.LOADING -> {
                             binding.shimmerLoading.apply {
@@ -99,9 +97,9 @@ class AntiHeroFragment : Fragment() {
         }
     }
 
-    private fun obtainViewModel(activity: FragmentActivity?): AntiHeroViewModel? {
-        factory = activity?.application?.let { ViewModelFactory.getInstance(it) }
-        return activity?.let { ViewModelProvider(it, factory!!).get(AntiHeroViewModel::class.java) }
+    private fun inject() {
+        (activity!!.application as SuperheroApplication).getApplicationComponent().inject(this)
+        viewModel = ViewModelProvider(this, factory).get(AntiHeroViewModel::class.java)
     }
 
     companion object {

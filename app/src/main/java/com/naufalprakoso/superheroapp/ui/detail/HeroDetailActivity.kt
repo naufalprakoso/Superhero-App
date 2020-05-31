@@ -1,10 +1,9 @@
 package com.naufalprakoso.superheroapp.ui.detail
 
-import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,20 +11,19 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.naufalprakoso.superheroapp.R
+import com.naufalprakoso.superheroapp.SuperheroApplication
 import com.naufalprakoso.superheroapp.databinding.ActivityHeroDetailBinding
 import com.naufalprakoso.superheroapp.util.HERO_ID
 import com.naufalprakoso.superheroapp.util.UtilUi
-import com.naufalprakoso.superheroapp.viewmodel.ViewModelFactory
 import com.naufalprakoso.superheroapp.vo.Status
 import javax.inject.Inject
 
 class HeroDetailActivity : AppCompatActivity() {
 
-    private var viewModel: HeroDetailViewModel? = null
+    private lateinit var viewModel: HeroDetailViewModel
 
     @Inject
-    @JvmField
-    var factory: ViewModelProvider.Factory? = null
+    lateinit var factory: ViewModelProvider.Factory
 
     private lateinit var binding: ActivityHeroDetailBinding
 
@@ -67,11 +65,10 @@ class HeroDetailActivity : AppCompatActivity() {
         }
 
         val heroId = intent?.getLongExtra(HERO_ID, -1)
-        viewModel = obtainViewModel(this)
+        inject()
 
-        if ((heroId != null && heroId >= 0) && viewModel != null) {
-            viewModel?.heroId = heroId
-            viewModel?.getHeroDetail()?.observe(this, Observer { resources ->
+        if (heroId != null && heroId >= 0) {
+            viewModel.getHeroDetail(heroId)?.observe(this, Observer { resources ->
                 when (resources.status) {
                     Status.LOADING -> {
                         binding.shimmerLoading.apply {
@@ -117,8 +114,8 @@ class HeroDetailActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
-    private fun obtainViewModel(activity: Activity?): HeroDetailViewModel? {
-        factory = activity?.application?.let { ViewModelFactory.getInstance(it) }
-        return factory?.let { ViewModelProvider(this, it).get(HeroDetailViewModel::class.java) }
+    private fun inject() {
+        (application as SuperheroApplication).getApplicationComponent().inject(this)
+        viewModel = ViewModelProvider(this, factory).get(HeroDetailViewModel::class.java)
     }
 }

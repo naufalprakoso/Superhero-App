@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name=".SuperheroApplication">
         <activity android:name=".ui.detail.HeroDetailActivity" />
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
