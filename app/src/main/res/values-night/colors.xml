@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#fff</color>
+    <color name="bgTheme">#000</color>
+
+    <color name="textSelected">#FFF</color>
+    <color name="darkGrey">#FFF</color>
+
+    <color name="white">#000</color>
+    <color name="black">#fff</color>
+</resources>

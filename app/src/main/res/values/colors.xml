@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="colorPrimary">#37474f</color>
-	<color name="colorPrimaryDark">#263238</color>
+	<color name="colorPrimary">#FFF</color>
+	<color name="colorPrimaryDark">#000</color>
 	<color name="colorAccent">#9fa8da</color>
+
+	<color name="bgTheme">#FFFFFF</color>
 
 	<color name="greySelectable">#e0e0e0</color>
 	<color name="white">#fff</color>
+	<color name="black">#000</color>
 	<color name="darkGrey">#212121</color>
 
 	<color name="textSelected">#212121</color>

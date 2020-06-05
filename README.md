@@ -39,7 +39,7 @@ Superhero app built with Kotlin
 - [ ] [Navigation](https://developer.android.com/topic/libraries/architecture/navigation)
 - [ ] [Dagger 2](https://developer.android.com/training/dependency-injection/dagger-android)
 - [ ] JUnit
-- [ ] DayNight
+- [x] DayNight
 
 ## Features
 
