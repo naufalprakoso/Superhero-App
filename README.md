@@ -37,7 +37,7 @@ Superhero app built with Kotlin
 - [x] [View Binding](https://developer.android.com/topic/libraries/view-binding)
 - [ ] [Data Binding](https://developer.android.com/topic/libraries/data-binding)
 - [ ] [Navigation](https://developer.android.com/topic/libraries/architecture/navigation)
-- [ ] [Dagger 2](https://developer.android.com/training/dependency-injection/dagger-android)
+- [x] [Dagger 2](https://developer.android.com/training/dependency-injection/dagger-android)
 - [ ] JUnit
 - [x] DayNight
 
