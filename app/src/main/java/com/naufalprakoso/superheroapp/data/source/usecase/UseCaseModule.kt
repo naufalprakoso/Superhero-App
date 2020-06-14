@@ -7,17 +7,15 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 
 @InstallIn(ApplicationComponent::class)
 @Module
 class UseCaseModule {
-    private val ioScope = CoroutineScope(Dispatchers.IO)
-    private val contextProviders = ContextProviders()
-
     @Provides
     fun provideHeroUseCase(
-        heroRepository: HeroRepository
+        heroRepository: HeroRepository,
+        ioScope: CoroutineScope,
+        contextProviders: ContextProviders
     ): HeroUseCase {
         return HeroUseCaseImpl(
             heroRepository,

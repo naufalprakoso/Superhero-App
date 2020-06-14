@@ -29,15 +29,12 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun heroDao(): HeroDao
 
     companion object {
-        private var INSTANCE: AppDatabase? = null
+        private const val databaseName = "Superhero.db"
 
-        fun getInstance(context: Context): AppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java, "Superhero.db"
-                ).build()
-            }
+        fun buildDatabase(context: Context): AppDatabase {
+            return Room.databaseBuilder(context, AppDatabase::class.java, databaseName)
+                .fallbackToDestructiveMigration()
+                .build()
         }
     }
 }

@@ -12,21 +12,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AppearanceFragment(private val appearance: Appearance) : Fragment() {
 
-    private var _binding: FragmentAppearanceBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentAppearanceBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAppearanceBinding.inflate(inflater, container, false)
+        binding = FragmentAppearanceBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

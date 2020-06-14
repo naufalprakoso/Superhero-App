@@ -23,21 +23,15 @@ class VillainFragment : Fragment() {
     private lateinit var adapter: VillainAdapter
     private val viewModel: VillainViewModel by viewModels()
 
-    private var _binding: FragmentVillainBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentVillainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentVillainBinding.inflate(inflater, container, false)
+        binding = FragmentVillainBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

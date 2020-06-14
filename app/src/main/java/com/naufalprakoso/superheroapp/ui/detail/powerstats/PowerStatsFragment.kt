@@ -12,21 +12,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PowerStatsFragment(private val powerStat: PowerStat) : Fragment() {
 
-    private var _binding: FragmentPowerStatsBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentPowerStatsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentPowerStatsBinding.inflate(inflater, container, false)
+        binding = FragmentPowerStatsBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

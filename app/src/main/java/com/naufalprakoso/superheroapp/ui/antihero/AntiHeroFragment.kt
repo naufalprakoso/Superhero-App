@@ -23,21 +23,15 @@ class AntiHeroFragment : Fragment() {
     private lateinit var adapter: AntiHeroAdapter
     private val viewModel: AntiHeroViewModel by viewModels()
 
-    private var _binding: FragmentAntiHeroBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentAntiHeroBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAntiHeroBinding.inflate(inflater, container, false)
+        binding = FragmentAntiHeroBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -23,21 +23,15 @@ class HeroFragment : Fragment() {
     private lateinit var adapter: HeroAdapter
     private val viewModel: HeroViewModel by viewModels()
 
-    private var _binding: FragmentHeroBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentHeroBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentHeroBinding.inflate(inflater, container, false)
+        binding = FragmentHeroBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

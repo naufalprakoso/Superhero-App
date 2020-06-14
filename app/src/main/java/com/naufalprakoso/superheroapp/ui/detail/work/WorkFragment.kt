@@ -8,34 +8,27 @@ import android.view.ViewGroup
 import com.naufalprakoso.superheroapp.data.source.local.entity.Work
 import com.naufalprakoso.superheroapp.databinding.FragmentWorkBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_work.*
 
 @AndroidEntryPoint
 class WorkFragment(private val work: Work) : Fragment() {
 
-    private var _binding: FragmentWorkBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentWorkBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentWorkBinding.inflate(inflater, container, false)
+        binding = FragmentWorkBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         if (activity != null) {
-            tvOccupation.text = work.occupation
-            tvBase.text = work.base
+            binding.tvOccupation.text = work.occupation
+            binding.tvBase.text = work.base
         }
     }
 

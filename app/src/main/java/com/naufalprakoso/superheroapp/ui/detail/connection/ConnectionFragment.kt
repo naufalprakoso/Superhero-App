@@ -12,21 +12,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ConnectionFragment(private val connection: Connection) : Fragment() {
 
-    private var _binding: FragmentConnectionBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentConnectionBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentConnectionBinding.inflate(inflater, container, false)
+        binding = FragmentConnectionBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
