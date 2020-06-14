@@ -3,8 +3,8 @@ package com.naufalprakoso.superheroapp.data.source.usecase
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.naufalprakoso.superheroapp.api.ServiceBuilder
 import com.naufalprakoso.superheroapp.data.source.NetworkBoundResource
+import com.naufalprakoso.superheroapp.data.source.NetworkUtil
 import com.naufalprakoso.superheroapp.data.source.local.entity.Appearance
 import com.naufalprakoso.superheroapp.data.source.local.entity.Image
 import com.naufalprakoso.superheroapp.data.source.local.entity.Work
@@ -15,6 +15,7 @@ import com.naufalprakoso.superheroapp.data.source.local.entity.PowerStat
 import com.naufalprakoso.superheroapp.data.source.local.relation.Superhero
 import com.naufalprakoso.superheroapp.data.source.local.repo.HeroRepository
 import com.naufalprakoso.superheroapp.data.source.remote.ApiResponse
+import com.naufalprakoso.superheroapp.data.source.remote.repo.HeroApiRepository
 import com.naufalprakoso.superheroapp.data.source.remote.response.HeroResponse
 import com.naufalprakoso.superheroapp.util.ContextProviders
 import com.naufalprakoso.superheroapp.util.mapper.HeroMapper
@@ -24,6 +25,7 @@ import kotlinx.coroutines.launch
 
 class HeroUseCaseImpl(
     private val heroRepository: HeroRepository,
+    private val heroApiRepository: HeroApiRepository,
     private val ioScope: CoroutineScope,
     private val contextProviders: ContextProviders
 ) : HeroUseCase {
@@ -45,10 +47,20 @@ class HeroUseCaseImpl(
                 return LivePagedListBuilder(heroRepository.getHeroes(), pagedListConfig).build()
             }
 
-            override fun shouldFetch(data: PagedList<Superhero>?): Boolean = data?.isEmpty() == true
+            override fun shouldFetch(data: PagedList<Superhero>?): Boolean =
+                if (data?.isEmpty() == true) {
+                    true
+                } else {
+                    if (!NetworkUtil.IS_ALREADY_FETCH) {
+                        NetworkUtil.IS_ALREADY_FETCH = true
+                        true
+                    } else {
+                        false
+                    }
+                }
 
             override fun createCall(): LiveData<ApiResponse<List<HeroResponse>>>? =
-                ServiceBuilder.superheroService.getAll()
+                heroApiRepository.getAll()
 
             override fun saveCallResult(data: List<HeroResponse>) {
                 val heroes = arrayListOf<Hero>()
@@ -88,10 +100,20 @@ class HeroUseCaseImpl(
                 return LivePagedListBuilder(heroRepository.getAntiHeroes(), pagedListConfig).build()
             }
 
-            override fun shouldFetch(data: PagedList<Superhero>?): Boolean = data?.isEmpty() == true
+            override fun shouldFetch(data: PagedList<Superhero>?): Boolean =
+                if (data?.isEmpty() == true) {
+                    true
+                } else {
+                    if (!NetworkUtil.IS_ALREADY_FETCH) {
+                        NetworkUtil.IS_ALREADY_FETCH = true
+                        true
+                    } else {
+                        false
+                    }
+                }
 
             override fun createCall(): LiveData<ApiResponse<List<HeroResponse>>>? =
-                ServiceBuilder.superheroService.getAll()
+                heroApiRepository.getAll()
 
             override fun saveCallResult(data: List<HeroResponse>) {
                 val heroes = arrayListOf<Hero>()
@@ -131,10 +153,20 @@ class HeroUseCaseImpl(
                 return LivePagedListBuilder(heroRepository.getVillains(), pagedListConfig).build()
             }
 
-            override fun shouldFetch(data: PagedList<Superhero>?): Boolean = data?.isEmpty() == true
+            override fun shouldFetch(data: PagedList<Superhero>?): Boolean =
+                if (data?.isEmpty() == true) {
+                    true
+                } else {
+                    if (!NetworkUtil.IS_ALREADY_FETCH) {
+                        NetworkUtil.IS_ALREADY_FETCH = true
+                        true
+                    } else {
+                        false
+                    }
+                }
 
             override fun createCall(): LiveData<ApiResponse<List<HeroResponse>>>? =
-                ServiceBuilder.superheroService.getAll()
+                heroApiRepository.getAll()
 
             override fun saveCallResult(data: List<HeroResponse>) {
                 val heroes = arrayListOf<Hero>()
