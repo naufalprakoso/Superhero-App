@@ -7,24 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.naufalprakoso.superheroapp.R
-import com.naufalprakoso.superheroapp.SuperheroApplication
 import com.naufalprakoso.superheroapp.databinding.FragmentAntiHeroBinding
 import com.naufalprakoso.superheroapp.ui.detail.HeroDetailActivity
 import com.naufalprakoso.superheroapp.util.HERO_ID
 import com.naufalprakoso.superheroapp.vo.Status
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AntiHeroFragment : Fragment() {
 
     private lateinit var adapter: AntiHeroAdapter
-    private lateinit var viewModel: AntiHeroViewModel
-
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
+    private val viewModel: AntiHeroViewModel by viewModels()
 
     private var _binding: FragmentAntiHeroBinding? = null
     private val binding get() = _binding!!
@@ -47,10 +44,8 @@ class AntiHeroFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         if (activity != null) {
-            inject()
-
             if (context != null) {
-                adapter = AntiHeroAdapter(context!!) { heroId ->
+                adapter = AntiHeroAdapter(requireContext()) { heroId ->
                     val intent = Intent(context, HeroDetailActivity::class.java)
                     intent.putExtra(HERO_ID, heroId)
                     startActivity(intent)
@@ -95,11 +90,6 @@ class AntiHeroFragment : Fragment() {
                 })
             }
         }
-    }
-
-    private fun inject() {
-        (activity!!.application as SuperheroApplication).getApplicationComponent().inject(this)
-        viewModel = ViewModelProvider(this, factory).get(AntiHeroViewModel::class.java)
     }
 
     companion object {

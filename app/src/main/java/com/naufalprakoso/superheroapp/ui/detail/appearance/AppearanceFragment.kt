@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.naufalprakoso.superheroapp.data.source.local.entity.Appearance
 import com.naufalprakoso.superheroapp.databinding.FragmentAppearanceBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AppearanceFragment(private val appearance: Appearance) : Fragment() {
 
     private var _binding: FragmentAppearanceBinding? = null

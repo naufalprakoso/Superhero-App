@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 apply(from = "$rootDir/ktlint.gradle.kts")
 
@@ -35,6 +36,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     viewBinding {
         isEnabled = true
     }
@@ -61,12 +66,11 @@ dependencies {
     implementation(Room.ktx)
     kapt(Room.compiler)
 
-    // Dependencies for Dagger
-    implementation(Dagger.dagger)
-    implementation(Dagger.android)
-    implementation(Dagger.androidSupport)
-    kapt(Dagger.compiler)
-    kapt(Dagger.processor)
+    // Dependencies for Hilt
+    implementation(Hilt.hilt)
+    implementation(Hilt.viewModel)
+    kapt(Hilt.compiler)
+    kapt(Hilt.viewModelCompiler)
 
     // Dependencies for Paging
     implementation(Dependencies.paging)
@@ -95,4 +99,7 @@ dependencies {
 
     // Tag Group
     implementation(Dependencies.tagGroup)
+
+    // Ktx
+    implementation(Dependencies.fragmentKtx)
 }

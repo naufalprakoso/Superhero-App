@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.naufalprakoso.superheroapp.data.source.local.entity.PowerStat
 import com.naufalprakoso.superheroapp.databinding.FragmentPowerStatsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PowerStatsFragment(private val powerStat: PowerStat) : Fragment() {
 
     private var _binding: FragmentPowerStatsBinding? = null

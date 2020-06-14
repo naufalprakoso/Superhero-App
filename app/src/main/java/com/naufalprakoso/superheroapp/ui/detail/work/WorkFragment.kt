@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.naufalprakoso.superheroapp.data.source.local.entity.Work
 import com.naufalprakoso.superheroapp.databinding.FragmentWorkBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_work.*
 
+@AndroidEntryPoint
 class WorkFragment(private val work: Work) : Fragment() {
 
     private var _binding: FragmentWorkBinding? = null

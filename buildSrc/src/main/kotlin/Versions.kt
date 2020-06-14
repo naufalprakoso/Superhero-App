@@ -12,13 +12,15 @@ object Versions {
     const val pagingVersion = "2.1.2"
     const val glideVersion = "4.10.0"
     const val glideCompilerVersion = "4.9.0"
-    const val daggerVersion = "2.27"
     const val materialVersion = "1.2.0-alpha06"
     const val retrofit2Version = "2.6.0"
     const val coroutinesCoreVersion = "1.2.1"
     const val coroutinesAndroidVersion = "1.1.1"
     const val gsonVersion = "2.8.6"
     const val shimmerVersion = "0.5.0"
+    const val hiltVersion = "2.28-alpha"
+    const val hiltLifeCycleVersion = "1.0.0-alpha01"
+    const val fragmentKtxVersion = "1.2.5"
 }
 
 object AppConfiguration {
@@ -44,6 +46,8 @@ object Dependencies {
     const val tagGroup = "me.gujun.android.taggroup:library:1.4@aar"
     const val gson = "com.google.code.gson:gson:${Versions.gsonVersion}"
     const val paging = "androidx.paging:paging-runtime:${Versions.pagingVersion}"
+
+    const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtxVersion}"
 }
 
 object Coroutines {
@@ -62,12 +66,12 @@ object Room {
     const val compiler = "androidx.room:room-compiler:${Versions.roomVersion}"
 }
 
-object Dagger {
-    const val dagger = "com.google.dagger:dagger:${Versions.daggerVersion}"
-    const val android = "com.google.dagger:dagger-android:${Versions.daggerVersion}"
-    const val androidSupport = "com.google.dagger:dagger-android-support:${Versions.daggerVersion}"
-    const val compiler = "com.google.dagger:dagger-compiler:${Versions.daggerVersion}"
-    const val processor = "com.google.dagger:dagger-android-processor:${Versions.daggerVersion}"
+object Hilt {
+    const val hilt = "com.google.dagger:hilt-android:${Versions.hiltVersion}"
+    const val compiler = "com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}"
+    const val plugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hiltVersion}"
+    const val viewModel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hiltLifeCycleVersion}"
+    const val viewModelCompiler = "androidx.hilt:hilt-compiler:${Versions.hiltLifeCycleVersion}"
 }
 
 object Glide {
@@ -79,4 +83,3 @@ object Testing {
     const val jUnit = "junit:junit:${Versions.junitVersion}"
     const val extJUnit = "androidx.test.ext:junit:${Versions.androidxTestVersion}"
 }
-

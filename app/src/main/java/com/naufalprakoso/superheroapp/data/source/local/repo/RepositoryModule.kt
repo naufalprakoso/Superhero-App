@@ -1,13 +1,14 @@
 package com.naufalprakoso.superheroapp.data.source.local.repo
 
 import com.naufalprakoso.superheroapp.data.source.local.db.HeroDao
-import com.naufalprakoso.superheroapp.di.AppScope
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 
+@InstallIn(ApplicationComponent::class)
 @Module
 class RepositoryModule {
-    @AppScope
     @Provides
     fun provideHeroRepository(heroDao: HeroDao): HeroRepository {
         return HeroRepositoryImpl(heroDao)

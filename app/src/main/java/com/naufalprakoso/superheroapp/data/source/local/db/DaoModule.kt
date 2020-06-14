@@ -1,13 +1,14 @@
 package com.naufalprakoso.superheroapp.data.source.local.db
 
-import com.naufalprakoso.superheroapp.di.AppScope
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 
+@InstallIn(ApplicationComponent::class)
 @Module
 class DaoModule {
     @Provides
-    @AppScope
     internal fun provideHeroDao(appDatabase: AppDatabase): HeroDao {
         return appDatabase.heroDao()
     }

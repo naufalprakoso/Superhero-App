@@ -3,27 +3,24 @@ package com.naufalprakoso.superheroapp.ui.detail
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.naufalprakoso.superheroapp.R
-import com.naufalprakoso.superheroapp.SuperheroApplication
 import com.naufalprakoso.superheroapp.databinding.ActivityHeroDetailBinding
 import com.naufalprakoso.superheroapp.util.HERO_ID
 import com.naufalprakoso.superheroapp.util.UtilUi
 import com.naufalprakoso.superheroapp.vo.Status
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HeroDetailActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: HeroDetailViewModel
-
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
+    private val viewModel: HeroDetailViewModel by viewModels()
 
     private lateinit var binding: ActivityHeroDetailBinding
 
@@ -65,8 +62,6 @@ class HeroDetailActivity : AppCompatActivity() {
         }
 
         val heroId = intent?.getLongExtra(HERO_ID, -1)
-        inject()
-
         if (heroId != null && heroId >= 0) {
             viewModel.getHeroDetail(heroId)?.observe(this, Observer { resources ->
                 when (resources.status) {
@@ -112,10 +107,5 @@ class HeroDetailActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
-    }
-
-    private fun inject() {
-        (application as SuperheroApplication).getApplicationComponent().inject(this)
-        viewModel = ViewModelProvider(this, factory).get(HeroDetailViewModel::class.java)
     }
 }

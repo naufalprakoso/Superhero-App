@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.naufalprakoso.superheroapp.data.source.local.entity.Biography
 import com.naufalprakoso.superheroapp.databinding.FragmentBiographyBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BiographyFragment(private val biography: Biography) : Fragment() {
 
     private var _binding: FragmentBiographyBinding? = null

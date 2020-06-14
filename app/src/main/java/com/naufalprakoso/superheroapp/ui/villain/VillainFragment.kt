@@ -7,24 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.naufalprakoso.superheroapp.R
-import com.naufalprakoso.superheroapp.SuperheroApplication
 import com.naufalprakoso.superheroapp.databinding.FragmentVillainBinding
 import com.naufalprakoso.superheroapp.ui.detail.HeroDetailActivity
 import com.naufalprakoso.superheroapp.util.HERO_ID
 import com.naufalprakoso.superheroapp.vo.Status
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class VillainFragment : Fragment() {
 
     private lateinit var adapter: VillainAdapter
-    private lateinit var viewModel: VillainViewModel
-
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
+    private val viewModel: VillainViewModel by viewModels()
 
     private var _binding: FragmentVillainBinding? = null
     private val binding get() = _binding!!
@@ -47,10 +44,8 @@ class VillainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         if (activity != null) {
-            inject()
-
             if (context != null) {
-                adapter = VillainAdapter(context!!) { heroId ->
+                adapter = VillainAdapter(requireContext()) { heroId ->
                     val intent = Intent(context, HeroDetailActivity::class.java)
                     intent.putExtra(HERO_ID, heroId)
                     startActivity(intent)
@@ -95,11 +90,6 @@ class VillainFragment : Fragment() {
                 })
             }
         }
-    }
-
-    private fun inject() {
-        (activity!!.application as SuperheroApplication).getApplicationComponent().inject(this)
-        viewModel = ViewModelProvider(this, factory).get(VillainViewModel::class.java)
     }
 
     companion object {
