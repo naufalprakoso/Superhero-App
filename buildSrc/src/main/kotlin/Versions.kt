@@ -32,7 +32,7 @@ object AppConfiguration {
 }
 
 object Dependencies {
-    const val gradle = "com.android.tools.build:gradle:3.6.3"
+    const val gradle = "com.android.tools.build:gradle:4.0.0"
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlinVersion}"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompatVersion}"
     const val materialDesign = "com.google.android.material:material:${Versions.materialVersion}"

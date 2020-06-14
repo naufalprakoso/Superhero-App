@@ -7,7 +7,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import kotlinx.coroutines.CoroutineScope
 
 @InstallIn(ApplicationComponent::class)
 @Module
@@ -16,13 +15,11 @@ class UseCaseModule {
     fun provideHeroUseCase(
         heroRepository: HeroRepository,
         heroApiRepository: HeroApiRepository,
-        ioScope: CoroutineScope,
         contextProviders: ContextProviders
     ): HeroUseCase {
         return HeroUseCaseImpl(
             heroRepository,
             heroApiRepository,
-            ioScope,
             contextProviders
         )
     }
