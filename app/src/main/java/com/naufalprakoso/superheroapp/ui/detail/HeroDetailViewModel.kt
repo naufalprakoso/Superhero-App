@@ -3,8 +3,8 @@ package com.naufalprakoso.superheroapp.ui.detail
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.naufalprakoso.superheroapp.data.source.local.relation.Superhero
-import com.naufalprakoso.superheroapp.data.source.usecase.HeroUseCase
+import com.naufalprakoso.superheroapp.database.relation.Superhero
+import com.naufalprakoso.superheroapp.hero.usecase.HeroUseCase
 import com.naufalprakoso.superheroapp.vo.Resource
 
 class HeroDetailViewModel @ViewModelInject constructor(

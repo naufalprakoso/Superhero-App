@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.naufalprakoso.superheroapp.data.source.local.entity.Work
+import com.naufalprakoso.superheroapp.database.entity.Work
 import com.naufalprakoso.superheroapp.databinding.FragmentWorkBinding
 import dagger.hilt.android.AndroidEntryPoint
 

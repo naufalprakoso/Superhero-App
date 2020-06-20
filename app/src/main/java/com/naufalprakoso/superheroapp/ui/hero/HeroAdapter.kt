@@ -8,7 +8,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.naufalprakoso.superheroapp.data.source.local.relation.Superhero
+import com.naufalprakoso.superheroapp.database.relation.Superhero
 import com.naufalprakoso.superheroapp.databinding.ItemHeroBinding
 import com.naufalprakoso.superheroapp.util.UtilUi
 

@@ -1,6 +1,6 @@
 package com.naufalprakoso.superheroapp.api
 
-import com.naufalprakoso.superheroapp.util.LiveDataCallAdapterFactory
+import com.naufalprakoso.superheroapp.livedata.LiveDataCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

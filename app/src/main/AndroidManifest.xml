@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.detail.HeroDetailActivity" />
         <activity
-            android:name=".ui.main.MainActivity">
+            android:name=".ui.home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

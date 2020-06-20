@@ -3,7 +3,7 @@ package com.naufalprakoso.superheroapp.ui.detail
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.naufalprakoso.superheroapp.data.source.local.relation.Superhero
+import com.naufalprakoso.superheroapp.database.relation.Superhero
 import com.naufalprakoso.superheroapp.ui.detail.appearance.AppearanceFragment
 import com.naufalprakoso.superheroapp.ui.detail.biography.BiographyFragment
 import com.naufalprakoso.superheroapp.ui.detail.powerstats.PowerStatsFragment

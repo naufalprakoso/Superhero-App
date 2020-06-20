@@ -1,8 +1,8 @@
 package com.naufalprakoso.superheroapp.api
 
 import androidx.lifecycle.LiveData
-import com.naufalprakoso.superheroapp.data.source.remote.ApiResponse
-import com.naufalprakoso.superheroapp.data.source.remote.response.HeroResponse
+import com.naufalprakoso.superheroapp.network.ApiResponse
+import com.naufalprakoso.superheroapp.network.response.HeroResponse
 import retrofit2.http.GET
 
 interface SuperheroService {
