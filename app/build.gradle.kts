@@ -72,9 +72,6 @@ dependencies {
     kapt(Hilt.compiler)
     kapt(Hilt.viewModelCompiler)
 
-    // Dependencies for Paging
-    implementation(Dependencies.paging)
-
     // Dependencies for Glide
     implementation(Glide.glide)
     kapt(Glide.compiler)

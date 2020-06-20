@@ -1,8 +1,6 @@
 package com.naufalprakoso.superheroapp.hero.usecase
 
 import androidx.lifecycle.LiveData
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
 import com.naufalprakoso.superheroapp.util.NetworkBoundResource
 import com.naufalprakoso.superheroapp.util.NetworkUtil
 import com.naufalprakoso.superheroapp.database.relation.Superhero
@@ -19,20 +17,14 @@ class HeroUseCaseImpl(
     private val contextProviders: ContextProviders
 ) : HeroUseCase {
 
-    private val pagedListConfig = PagedList.Config.Builder()
-        .setEnablePlaceholders(false)
-        .setPrefetchDistance(30)
-        .setPageSize(175)
-        .build()
-
-    override fun getHeroes(): LiveData<Resource<PagedList<Superhero>>> {
+    override fun getHeroes(): LiveData<Resource<List<Superhero>>> {
         return object :
-            NetworkBoundResource<PagedList<Superhero>, List<HeroResponse>>(contextProviders) {
-            override fun loadFromDB(): LiveData<PagedList<Superhero>> {
-                return LivePagedListBuilder(heroRepository.getHeroes(), pagedListConfig).build()
+            NetworkBoundResource<List<Superhero>, List<HeroResponse>>(contextProviders) {
+            override fun loadFromDB(): LiveData<List<Superhero>> {
+                return heroRepository.getHeroes()
             }
 
-            override fun shouldFetch(data: PagedList<Superhero>?): Boolean =
+            override fun shouldFetch(data: List<Superhero>?): Boolean =
                 if (data?.isEmpty() == true) {
                     true
                 } else {
@@ -53,14 +45,14 @@ class HeroUseCaseImpl(
         }.asLiveData()
     }
 
-    override fun getAntiHeroes(): LiveData<Resource<PagedList<Superhero>>> {
+    override fun getAntiHeroes(): LiveData<Resource<List<Superhero>>> {
         return object :
-            NetworkBoundResource<PagedList<Superhero>, List<HeroResponse>>(contextProviders) {
-            override fun loadFromDB(): LiveData<PagedList<Superhero>> {
-                return LivePagedListBuilder(heroRepository.getAntiHeroes(), pagedListConfig).build()
+            NetworkBoundResource<List<Superhero>, List<HeroResponse>>(contextProviders) {
+            override fun loadFromDB(): LiveData<List<Superhero>> {
+                return heroRepository.getAntiHeroes()
             }
 
-            override fun shouldFetch(data: PagedList<Superhero>?): Boolean =
+            override fun shouldFetch(data: List<Superhero>?): Boolean =
                 if (data?.isEmpty() == true) {
                     true
                 } else {
@@ -81,14 +73,14 @@ class HeroUseCaseImpl(
         }.asLiveData()
     }
 
-    override fun getVillains(): LiveData<Resource<PagedList<Superhero>>> {
+    override fun getVillains(): LiveData<Resource<List<Superhero>>> {
         return object :
-            NetworkBoundResource<PagedList<Superhero>, List<HeroResponse>>(contextProviders) {
-            override fun loadFromDB(): LiveData<PagedList<Superhero>> {
-                return LivePagedListBuilder(heroRepository.getVillains(), pagedListConfig).build()
+            NetworkBoundResource<List<Superhero>, List<HeroResponse>>(contextProviders) {
+            override fun loadFromDB(): LiveData<List<Superhero>> {
+                return heroRepository.getVillains()
             }
 
-            override fun shouldFetch(data: PagedList<Superhero>?): Boolean =
+            override fun shouldFetch(data: List<Superhero>?): Boolean =
                 if (data?.isEmpty() == true) {
                     true
                 } else {

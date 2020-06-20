@@ -4,8 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.naufalprakoso.superheroapp.database.relation.Superhero
@@ -15,22 +13,10 @@ import com.naufalprakoso.superheroapp.util.UtilUi
 class HeroAdapter(
     context: Context,
     private val clickListener: (Long) -> Unit
-) : PagedListAdapter<Superhero, HeroAdapter.ViewHolder>(HeroDiffCallback) {
+) : RecyclerView.Adapter<HeroAdapter.ViewHolder>() {
 
     private val inflater = LayoutInflater.from(context)
     private lateinit var binding: ItemHeroBinding
-
-    companion object {
-        val HeroDiffCallback = object : DiffUtil.ItemCallback<Superhero>() {
-            override fun areItemsTheSame(oldItem: Superhero, newItem: Superhero): Boolean =
-                oldItem.hero.id == newItem.hero.id &&
-                oldItem.hero.name == newItem.hero.name &&
-                oldItem.biography.fullName == newItem.biography.fullName
-
-            override fun areContentsTheSame(oldItem: Superhero, newItem: Superhero): Boolean =
-                oldItem == newItem
-        }
-    }
 
     private val superheroes = arrayListOf<Superhero>()
 

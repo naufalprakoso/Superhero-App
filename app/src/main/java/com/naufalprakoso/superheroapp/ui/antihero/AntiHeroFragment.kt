@@ -69,7 +69,6 @@ class AntiHeroFragment : Fragment() {
                             val data = it.data
                             if (!data.isNullOrEmpty()) {
                                 adapter.setAntiHeroes(data)
-                                adapter.submitList(data)
                                 adapter.notifyDataSetChanged()
                             }
                         }

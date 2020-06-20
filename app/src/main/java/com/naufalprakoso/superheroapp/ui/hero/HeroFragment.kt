@@ -69,7 +69,6 @@ class HeroFragment : Fragment() {
                             val data = it.data
                             if (!data.isNullOrEmpty()) {
                                 adapter.setHeroes(data)
-                                adapter.submitList(data)
                                 adapter.notifyDataSetChanged()
                             }
                         }

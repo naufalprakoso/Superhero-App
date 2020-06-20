@@ -1,7 +1,6 @@
 package com.naufalprakoso.superheroapp.hero.repo
 
 import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
 import com.naufalprakoso.superheroapp.database.dao.HeroDao
 import com.naufalprakoso.superheroapp.database.entity.Hero
 import com.naufalprakoso.superheroapp.database.entity.Work
@@ -25,15 +24,15 @@ class HeroRepositoryImpl(
         HeroMapper()
     }
 
-    override fun getHeroes(): DataSource.Factory<Int, Superhero> {
+    override fun getHeroes(): LiveData<List<Superhero>> {
         return heroDao.getHeroes()
     }
 
-    override fun getAntiHeroes(): DataSource.Factory<Int, Superhero> {
+    override fun getAntiHeroes(): LiveData<List<Superhero>> {
         return heroDao.getAntiHeroes()
     }
 
-    override fun getVillains(): DataSource.Factory<Int, Superhero> {
+    override fun getVillains(): LiveData<List<Superhero>> {
         return heroDao.getVillains()
     }
 

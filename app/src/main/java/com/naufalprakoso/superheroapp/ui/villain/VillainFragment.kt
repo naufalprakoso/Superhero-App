@@ -69,7 +69,6 @@ class VillainFragment : Fragment() {
                             val data = it.data
                             if (!data.isNullOrEmpty()) {
                                 adapter.setVillains(data)
-                                adapter.submitList(data)
                                 adapter.notifyDataSetChanged()
                             }
                         }

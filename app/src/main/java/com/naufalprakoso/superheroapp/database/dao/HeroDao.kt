@@ -1,7 +1,6 @@
 package com.naufalprakoso.superheroapp.database.dao
 
 import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Insert
@@ -20,15 +19,15 @@ import com.naufalprakoso.superheroapp.database.relation.Superhero
 interface HeroDao {
     @Transaction
     @Query("SELECT * FROM superhero WHERE alignment = 'good'")
-    fun getHeroes(): DataSource.Factory<Int, Superhero>
+    fun getHeroes(): LiveData<List<Superhero>>
 
     @Transaction
     @Query("SELECT * FROM superhero WHERE alignment = 'bad'")
-    fun getVillains(): DataSource.Factory<Int, Superhero>
+    fun getVillains(): LiveData<List<Superhero>>
 
     @Transaction
     @Query("SELECT * FROM superhero WHERE alignment = 'neutral' OR alignment = '-'")
-    fun getAntiHeroes(): DataSource.Factory<Int, Superhero>
+    fun getAntiHeroes(): LiveData<List<Superhero>>
 
     @Transaction
     @Query("SELECT * FROM superhero WHERE id = :id")

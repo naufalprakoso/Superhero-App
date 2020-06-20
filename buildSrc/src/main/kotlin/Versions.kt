@@ -9,7 +9,6 @@ object Versions {
     const val roomVersion = "2.2.5"
     const val archLifecycleVersion = "2.1.0"
     const val junitVersion = "4.12"
-    const val pagingVersion = "2.1.2"
     const val glideVersion = "4.10.0"
     const val glideCompilerVersion = "4.9.0"
     const val materialVersion = "1.2.0-alpha06"
@@ -45,7 +44,6 @@ object Dependencies {
     const val shimmer = "com.facebook.shimmer:shimmer:${Versions.shimmerVersion}"
     const val tagGroup = "me.gujun.android.taggroup:library:1.4@aar"
     const val gson = "com.google.code.gson:gson:${Versions.gsonVersion}"
-    const val paging = "androidx.paging:paging-runtime:${Versions.pagingVersion}"
 
     const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtxVersion}"
 }
