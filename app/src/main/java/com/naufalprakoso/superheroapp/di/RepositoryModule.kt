@@ -1,5 +1,6 @@
 package com.naufalprakoso.superheroapp.di
 
+import com.naufalprakoso.superheroapp.database.AppDatabase
 import com.naufalprakoso.superheroapp.database.dao.HeroDao
 import com.naufalprakoso.superheroapp.hero.repo.HeroRepository
 import com.naufalprakoso.superheroapp.hero.repo.HeroRepositoryImpl
@@ -14,11 +15,11 @@ import kotlinx.coroutines.CoroutineScope
 class RepositoryModule {
     @Provides
     fun provideHeroRepository(
-        heroDao: HeroDao,
+        appDatabase: AppDatabase,
         ioScope: CoroutineScope
     ): HeroRepository {
         return HeroRepositoryImpl(
-            heroDao,
+            appDatabase.heroDao(),
             ioScope
         )
     }

@@ -11,7 +11,7 @@ import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
 @Module
-object CoroutineModule {
+class CoroutineModule {
     @Singleton
     @Provides
     fun provideContextProviders() = ContextProviders()
