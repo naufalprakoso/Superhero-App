@@ -1,7 +1,6 @@
 package com.naufalprakoso.superheroapp.di
 
 import com.naufalprakoso.superheroapp.database.AppDatabase
-import com.naufalprakoso.superheroapp.database.dao.HeroDao
 import com.naufalprakoso.superheroapp.hero.repo.HeroRepository
 import com.naufalprakoso.superheroapp.hero.repo.HeroRepositoryImpl
 import dagger.Module

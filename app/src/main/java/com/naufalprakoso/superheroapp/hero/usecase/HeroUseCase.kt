@@ -8,5 +8,4 @@ interface HeroUseCase {
     fun getHeroes(): LiveData<Resource<List<Superhero>>>
     fun getAntiHeroes(): LiveData<Resource<List<Superhero>>>
     fun getVillains(): LiveData<Resource<List<Superhero>>>
-    fun getHeroById(id: Long): LiveData<Resource<Superhero>>
 }

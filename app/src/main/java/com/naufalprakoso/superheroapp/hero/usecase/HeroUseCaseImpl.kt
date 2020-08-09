@@ -100,17 +100,4 @@ class HeroUseCaseImpl(
             }
         }.asLiveData()
     }
-
-    override fun getHeroById(id: Long): LiveData<Resource<Superhero>> {
-        return object :
-            NetworkBoundResource<Superhero, HeroResponse>(contextProviders) {
-            override fun loadFromDB(): LiveData<Superhero> {
-                return heroRepository.getById(id)
-            }
-
-            override fun shouldFetch(data: Superhero?): Boolean = false
-            override fun createCall(): LiveData<ApiResponse<HeroResponse>>? = null
-            override fun saveCallResult(data: HeroResponse) {}
-        }.asLiveData()
-    }
 }

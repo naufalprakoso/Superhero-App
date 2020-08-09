@@ -4,14 +4,13 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.naufalprakoso.superheroapp.database.relation.Superhero
-import com.naufalprakoso.superheroapp.hero.usecase.HeroUseCase
-import com.naufalprakoso.superheroapp.vo.Resource
+import com.naufalprakoso.superheroapp.hero.repo.HeroRepository
 
 class HeroDetailViewModel @ViewModelInject constructor(
-    private val heroUseCase: HeroUseCase
+    private val heroRepository: HeroRepository
 ) : ViewModel() {
 
-    fun getHeroDetail(heroId: Long = 0): LiveData<Resource<Superhero>>? {
-        return heroUseCase.getHeroById(heroId)
+    fun getHeroDetail(heroId: Long = 0): LiveData<Superhero>? {
+        return heroRepository.getById(heroId)
     }
 }
