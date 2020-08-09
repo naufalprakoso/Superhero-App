@@ -7,6 +7,7 @@ import com.naufalprakoso.superheroapp.hero.usecase.HeroUseCaseImpl
 import com.naufalprakoso.superheroapp.util.ContextProviders
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 
@@ -14,6 +15,7 @@ import dagger.hilt.android.components.ApplicationComponent
 @Module
 class UseCaseModule {
     @Provides
+    @Reusable
     fun provideHeroUseCase(
         heroRepository: HeroRepository,
         heroApiRepository: HeroApiRepository,
