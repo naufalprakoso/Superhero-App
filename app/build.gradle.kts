@@ -97,6 +97,10 @@ dependencies {
     // Tag Group
     implementation(Dependencies.tagGroup)
 
+    // Stetho
+    implementation(Stetho.stetho)
+    implementation(Stetho.okHttp)
+
     // Ktx
     implementation(Dependencies.fragmentKtx)
 }

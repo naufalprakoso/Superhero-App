@@ -20,6 +20,7 @@ object Versions {
     const val hiltVersion = "2.28-alpha"
     const val hiltLifeCycleVersion = "1.0.0-alpha01"
     const val fragmentKtxVersion = "1.2.5"
+    const val stethoVersion = "1.5.1"
 }
 
 object AppConfiguration {
@@ -70,6 +71,11 @@ object Hilt {
     const val plugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hiltVersion}"
     const val viewModel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hiltLifeCycleVersion}"
     const val viewModelCompiler = "androidx.hilt:hilt-compiler:${Versions.hiltLifeCycleVersion}"
+}
+
+object Stetho {
+    const val stetho = "com.facebook.stetho:stetho:${Versions.stethoVersion}"
+    const val okHttp = "com.facebook.stetho:stetho-okhttp3:${Versions.stethoVersion}"
 }
 
 object Glide {
