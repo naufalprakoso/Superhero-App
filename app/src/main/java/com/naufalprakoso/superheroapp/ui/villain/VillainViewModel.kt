@@ -10,6 +10,7 @@ import com.naufalprakoso.superheroapp.vo.Resource
 class VillainViewModel @ViewModelInject constructor(
     private val heroUseCase: HeroUseCase
 ) : ViewModel() {
+
     fun getVillains(): LiveData<Resource<List<Superhero>>>? {
         return heroUseCase.getVillains()
     }

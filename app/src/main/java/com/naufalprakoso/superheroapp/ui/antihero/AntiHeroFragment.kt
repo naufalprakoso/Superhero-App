@@ -39,50 +39,60 @@ class AntiHeroFragment : Fragment() {
 
         if (activity != null) {
             if (context != null) {
-                adapter = AntiHeroAdapter(requireContext()) { heroId ->
-                    val intent = Intent(context, HeroDetailActivity::class.java)
-                    intent.putExtra(HERO_ID, heroId)
-                    startActivity(intent)
-                }
-                adapter.setHasStableIds(true)
-
-                binding.rvAntiHeroes.setHasFixedSize(true)
-                binding.rvAntiHeroes.setItemViewCacheSize(10)
-                binding.rvAntiHeroes.layoutManager = GridLayoutManager(context, 2)
-                binding.rvAntiHeroes.adapter = adapter
-                binding.rvAntiHeroes.isNestedScrollingEnabled = false
-
-                viewModel.getAntiHeroes()?.observe(viewLifecycleOwner, Observer {
-                    when (it.status) {
-                        Status.LOADING -> {
-                            binding.shimmerLoading.apply {
-                                visibility = View.VISIBLE
-                                startShimmer()
-                            }
-                        }
-                        Status.SUCCESS -> {
-                            binding.shimmerLoading.apply {
-                                stopShimmer()
-                                visibility = View.GONE
-                            }
-
-                            val data = it.data
-                            if (!data.isNullOrEmpty()) {
-                                adapter.setAntiHeroes(data)
-                                adapter.notifyDataSetChanged()
-                            }
-                        }
-                        Status.ERROR -> {
-                            Toast.makeText(context, getString(R.string.msg_check_connection), Toast.LENGTH_SHORT).show()
-                            binding.shimmerLoading.apply {
-                                stopShimmer()
-                                visibility = View.GONE
-                            }
-                        }
-                    }
-                })
+                initAdapter()
+                initRecyclerView()
+                observerAntiHeroes()
             }
         }
+    }
+
+    private fun initAdapter() {
+        adapter = AntiHeroAdapter(requireContext()) { heroId ->
+            val intent = Intent(context, HeroDetailActivity::class.java)
+            intent.putExtra(HERO_ID, heroId)
+            startActivity(intent)
+        }
+        adapter.setHasStableIds(true)
+    }
+
+    private fun initRecyclerView() {
+        binding.rvAntiHeroes.setHasFixedSize(true)
+        binding.rvAntiHeroes.setItemViewCacheSize(10)
+        binding.rvAntiHeroes.layoutManager = GridLayoutManager(context, 2)
+        binding.rvAntiHeroes.adapter = adapter
+        binding.rvAntiHeroes.isNestedScrollingEnabled = false
+    }
+
+    private fun observerAntiHeroes() {
+        viewModel.getAntiHeroes()?.observe(viewLifecycleOwner, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                    binding.shimmerLoading.apply {
+                        visibility = View.VISIBLE
+                        startShimmer()
+                    }
+                }
+                Status.SUCCESS -> {
+                    binding.shimmerLoading.apply {
+                        stopShimmer()
+                        visibility = View.GONE
+                    }
+
+                    val data = it.data
+                    if (!data.isNullOrEmpty()) {
+                        adapter.setAntiHeroes(data)
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+                Status.ERROR -> {
+                    Toast.makeText(context, getString(R.string.msg_check_connection), Toast.LENGTH_SHORT).show()
+                    binding.shimmerLoading.apply {
+                        stopShimmer()
+                        visibility = View.GONE
+                    }
+                }
+            }
+        })
     }
 
     companion object {

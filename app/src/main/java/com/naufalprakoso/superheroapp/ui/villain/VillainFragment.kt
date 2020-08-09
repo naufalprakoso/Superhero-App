@@ -39,50 +39,60 @@ class VillainFragment : Fragment() {
 
         if (activity != null) {
             if (context != null) {
-                adapter = VillainAdapter(requireContext()) { heroId ->
-                    val intent = Intent(context, HeroDetailActivity::class.java)
-                    intent.putExtra(HERO_ID, heroId)
-                    startActivity(intent)
-                }
-                adapter.setHasStableIds(true)
-
-                binding.rvVillains.setHasFixedSize(true)
-                binding.rvVillains.setItemViewCacheSize(10)
-                binding.rvVillains.layoutManager = GridLayoutManager(context, 2)
-                binding.rvVillains.adapter = adapter
-                binding.rvVillains.isNestedScrollingEnabled = false
-
-                viewModel.getVillains()?.observe(viewLifecycleOwner, Observer {
-                    when (it.status) {
-                        Status.LOADING -> {
-                            binding.shimmerLoading.apply {
-                                visibility = View.VISIBLE
-                                startShimmer()
-                            }
-                        }
-                        Status.SUCCESS -> {
-                            binding.shimmerLoading.apply {
-                                stopShimmer()
-                                visibility = View.GONE
-                            }
-
-                            val data = it.data
-                            if (!data.isNullOrEmpty()) {
-                                adapter.setVillains(data)
-                                adapter.notifyDataSetChanged()
-                            }
-                        }
-                        Status.ERROR -> {
-                            Toast.makeText(activity, getString(R.string.msg_check_connection), Toast.LENGTH_SHORT).show()
-                            binding.shimmerLoading.apply {
-                                stopShimmer()
-                                visibility = View.GONE
-                            }
-                        }
-                    }
-                })
+                initAdapter()
+                initRecyclerView()
+                observeVillains()
             }
         }
+    }
+
+    private fun initAdapter() {
+        adapter = VillainAdapter(requireContext()) { heroId ->
+            val intent = Intent(context, HeroDetailActivity::class.java)
+            intent.putExtra(HERO_ID, heroId)
+            startActivity(intent)
+        }
+        adapter.setHasStableIds(true)
+    }
+
+    private fun initRecyclerView() {
+        binding.rvVillains.setHasFixedSize(true)
+        binding.rvVillains.setItemViewCacheSize(10)
+        binding.rvVillains.layoutManager = GridLayoutManager(context, 2)
+        binding.rvVillains.adapter = adapter
+        binding.rvVillains.isNestedScrollingEnabled = false
+    }
+
+    private fun observeVillains() {
+        viewModel.getVillains()?.observe(viewLifecycleOwner, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                    binding.shimmerLoading.apply {
+                        visibility = View.VISIBLE
+                        startShimmer()
+                    }
+                }
+                Status.SUCCESS -> {
+                    binding.shimmerLoading.apply {
+                        stopShimmer()
+                        visibility = View.GONE
+                    }
+
+                    val data = it.data
+                    if (!data.isNullOrEmpty()) {
+                        adapter.setVillains(data)
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+                Status.ERROR -> {
+                    Toast.makeText(activity, getString(R.string.msg_check_connection), Toast.LENGTH_SHORT).show()
+                    binding.shimmerLoading.apply {
+                        stopShimmer()
+                        visibility = View.GONE
+                    }
+                }
+            }
+        })
     }
 
     companion object {

@@ -16,15 +16,29 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         val tabTitles = arrayOf(
             getString(R.string.title_hero),
             getString(R.string.title_anti_hero),
             getString(R.string.title_villain)
         )
 
+        initTabLayout()
+
+        val tabsAdapter = HomeTabsAdapter(this)
+        binding.viewPager.adapter = tabsAdapter
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = tabTitles[position]
+        }.attach()
+
+        setContentView(binding.root)
+    }
+
+    private fun initTabLayout() {
         binding.tabLayout.apply {
             tabGravity = TabLayout.GRAVITY_FILL
 
@@ -46,14 +60,6 @@ class MainActivity : AppCompatActivity() {
                 override fun onTabReselected(tab: TabLayout.Tab) {}
             })
         }
-
-        val tabsAdapter = HomeTabsAdapter(this)
-        binding.viewPager.adapter = tabsAdapter
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.text = tabTitles[position]
-        }.attach()
-
-        setContentView(binding.root)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

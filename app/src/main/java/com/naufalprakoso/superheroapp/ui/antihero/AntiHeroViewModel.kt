@@ -10,6 +10,7 @@ import com.naufalprakoso.superheroapp.vo.Resource
 class AntiHeroViewModel @ViewModelInject constructor(
     private val heroUseCase: HeroUseCase
 ) : ViewModel() {
+
     fun getAntiHeroes(): LiveData<Resource<List<Superhero>>>? {
         return heroUseCase.getAntiHeroes()
     }

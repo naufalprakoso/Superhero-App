@@ -29,14 +29,13 @@ class HeroDetailActivity : AppCompatActivity() {
         binding = ActivityHeroDetailBinding.inflate(layoutInflater)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val tabTitles = arrayOf(
-            getString(R.string.title_tab_biography),
-            getString(R.string.title_tab_power_stats),
-            getString(R.string.title_tab_appearance),
-            getString(R.string.title_tab_work),
-            getString(R.string.title_tab_connection)
-        )
+        initTabLayout()
+        observeHeroDetail()
 
+        setContentView(binding.root)
+    }
+
+    private fun initTabLayout() {
         binding.tabLayout.apply {
             tabGravity = TabLayout.GRAVITY_FILL
 
@@ -60,7 +59,9 @@ class HeroDetailActivity : AppCompatActivity() {
                 override fun onTabReselected(tab: TabLayout.Tab) {}
             })
         }
+    }
 
+    private fun observeHeroDetail() {
         val heroId = intent?.getLongExtra(HERO_ID, -1)
         if (heroId != null && heroId >= 0) {
             viewModel.getHeroDetail(heroId)?.observe(this, Observer { resources ->
@@ -80,19 +81,36 @@ class HeroDetailActivity : AppCompatActivity() {
                         binding.layoutMain.visibility = View.VISIBLE
 
                         if (hero != null) {
+                            val tabTitles = arrayOf(
+                                getString(R.string.title_tab_biography),
+                                getString(R.string.title_tab_power_stats),
+                                getString(R.string.title_tab_appearance),
+                                getString(R.string.title_tab_work),
+                                getString(R.string.title_tab_connection)
+                            )
+
                             supportActionBar?.title = hero.hero.name
 
-                            Glide.with(this).asBitmap().apply(UtilUi.imageHero()).load(hero.image.lg).into(binding.layoutHeader.ivHero)
+                            Glide.with(this).asBitmap().apply(UtilUi.imageHero())
+                                .load(hero.image.lg).into(binding.layoutHeader.ivHero)
                             binding.layoutHeader.tvName.text = hero.hero.name
                             binding.layoutHeader.tvRace.text = hero.appearance.getRace
 
-                            val tabsAdapter = HeroDetailTabsAdapter(this, hero, binding.tabLayout.tabCount)
+                            val tabsAdapter =
+                                HeroDetailTabsAdapter(this, hero, binding.tabLayout.tabCount)
                             binding.viewPager.adapter = tabsAdapter
-                            TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position -> tab.text = tabTitles[position] }.attach()
+                            TabLayoutMediator(
+                                binding.tabLayout,
+                                binding.viewPager
+                            ) { tab, position -> tab.text = tabTitles[position] }.attach()
                         }
                     }
                     Status.ERROR -> {
-                        Toast.makeText(this, getString(R.string.msg_check_connection), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.msg_check_connection),
+                            Toast.LENGTH_SHORT
+                        ).show()
                         binding.shimmerLoading.apply {
                             stopShimmer()
                         }
@@ -100,8 +118,6 @@ class HeroDetailActivity : AppCompatActivity() {
                 }
             })
         }
-
-        setContentView(binding.root)
     }
 
     override fun onSupportNavigateUp(): Boolean {
