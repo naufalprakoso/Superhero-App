@@ -33,7 +33,7 @@ Superhero app built with Kotlin
 - [x] [Room](https://developer.android.com/topic/libraries/architecture/room)
 - [x] [Coroutines](https://developer.android.com/topic/libraries/architecture/coroutines)
 - [x] [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html)
-- [x] [Ktlint](https://ktlint.github.io/)
+- [x] [Detekt](https://github.com/detekt/detekt)
 - [x] [Retrofit](https://square.github.io/retrofit/)
 - [x] [View Binding](https://developer.android.com/topic/libraries/view-binding)
 - [ ] [Data Binding](https://developer.android.com/topic/libraries/data-binding)

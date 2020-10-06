@@ -20,6 +20,26 @@ allprojects {
     }
 }
 
+plugins {
+    id("io.gitlab.arturbosch.detekt") version Versions.detekt
+}
+
+subprojects {
+    apply {
+        plugin("io.gitlab.arturbosch.detekt")
+    }
+
+    detekt {
+        config = rootProject.files("config/detekt/detekt.yml")
+        reports {
+            html {
+                enabled = true
+                destination = file("build/reports/detekt.html")
+            }
+        }
+    }
+}
+
 tasks.register("clean", Delete::class){
     delete(rootProject.buildDir)
 }

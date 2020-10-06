@@ -21,6 +21,7 @@ object Versions {
     const val hiltLifeCycle = "1.0.0-alpha01"
     const val fragmentKtx = "1.2.5"
     const val stetho = "1.5.1"
+    const val detekt = "1.14.1"
 }
 
 object AppConfiguration {
@@ -45,6 +46,7 @@ object Dependencies {
     const val shimmer = "com.facebook.shimmer:shimmer:${Versions.shimmer}"
     const val tagGroup = "me.gujun.android.taggroup:library:1.4@aar"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
+    const val detekt = "io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}"
 
     const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtx}"
 }
