@@ -40,13 +40,22 @@ class AntiHeroAdapter(
         return antiHeroes[position].hero.id.hashCode().toLong()
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bindItem(binding: ItemHeroBinding, superhero: Superhero, clickListener: (Long) -> Unit) {
+        fun bindItem(
+            binding: ItemHeroBinding,
+            superhero: Superhero,
+            clickListener: (Long) -> Unit
+        ) {
             val image = superhero.image.md
             val hero = superhero.hero
             val race = superhero.appearance.getRace
 
-            Glide.with(binding.root.context).asBitmap().apply(UtilUi.imageHero()).load(image).into(binding.ivHero)
+            Glide.with(binding.root.context).asBitmap().apply(UtilUi.imageHero()).load(image)
+                .into(binding.ivHero)
             binding.tvName.text = hero.name
             binding.tvRace.text = race
 
