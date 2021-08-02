@@ -5,7 +5,6 @@ plugins {
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
 }
-apply(from = "$rootDir/ktlint.gradle.kts")
 
 android {
     compileSdkVersion(29)
@@ -103,4 +102,7 @@ dependencies {
 
     // Ktx
     implementation(Dependencies.fragmentKtx)
+
+    // Detekt
+    detektPlugins(Dependencies.detekt)
 }

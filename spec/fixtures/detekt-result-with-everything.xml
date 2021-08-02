@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<checkstyle version="4.3">
+    <file name="MyProject/app/src/main/java/com/company/package/model/Object1.kt">
+        <error line="5" column="28" severity="warning" message="The more parameters a method has the more complex it is. Long parameter lists are often used to control complex algorithms and violate the Single Responsibility Principle. Prefer methods with short parameter lists." source="detekt.LongParameterList" />
+    </file>
+    <file name="MyProject/app/src/main/java/com/company/package/model/Object2.kt">
+        <error line="41" column="22" severity="error" message="Thrown exception is too generic. Prefer throwing project specific exceptions to handle error cases." source="detekt.TooGenericExceptionCaught" />
+    </file>
+    <file name="MyProject/app/src/main/java/com/company/package/model/Object3.kt">
+        <error line="69" column="19" severity="warning" message="Report magic numbers. Magic number is a numeric literal that is not defined as a constant and hence it&apos;s unclear what the purpose of this number is. It&apos;s better to declare such numbers as constants and give them a proper name. By default, -1, 0, 1, and 2 are not considered to be magic numbers." source="detekt.MagicNumber" />
+    </file>
+</checkstyle>
